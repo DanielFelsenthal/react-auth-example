@@ -1,3 +1,4 @@
+import { Button,TextField } from '@material-ui/core';
 import React, { Component } from 'react';
 
 export default class Login extends Component {
@@ -18,6 +19,8 @@ export default class Login extends Component {
 
   onSubmit = (event) => {
     event.preventDefault();
+    //console.log(JSON.stringify(this.state),"Bringie");
+    localStorage.setItem('userEm', this.state.email);
     fetch('/api/authenticate', {
       method: 'POST',
       body: JSON.stringify(this.state),
@@ -42,16 +45,22 @@ export default class Login extends Component {
   render() {
     return (
       <form onSubmit={this.onSubmit}>
+        <div style={{
+          display: "grid",
+          justifyContent: "center",
+          marginTop: "5%",
+        }}>
         <h1>Login Below!</h1>
-        <input
+        <TextField
           type="email"
           name="email"
           placeholder="Enter email"
           value={this.state.email}
           onChange={this.handleInputChange}
           required
+          as={TextField}
         />
-        <input
+        <TextField
           type="password"
           name="password"
           placeholder="Enter password"
@@ -59,7 +68,8 @@ export default class Login extends Component {
           onChange={this.handleInputChange}
           required
         />
-        <input type="submit" value="Submit"/>
+        <Button type="submit" variant="contained">Submit</Button>
+        </div>
       </form>
     );
   }

@@ -4,7 +4,7 @@ export default class Secret extends Component {
   constructor() {
     super();
     this.state = {
-      message: 'Loading...'
+      message: ''
     }
   }
 
